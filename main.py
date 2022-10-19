@@ -2,7 +2,7 @@ import time
 import csv
 import bs4 as bs
 import pandas as pd
-from datetime import date
+from datetime import date, datetime
 from math import ceil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -57,10 +57,12 @@ links = []
 for li in lis_jobs:
     anchor_of_job = li.find_all('a', {'data-tracking-control-name': 'public_jobs_jserp-result_search-card'})
     links.append(anchor_of_job[0]['href'])
-    
+
 today = date.today()
+now = datetime.now()
+current_time = now.strftime("%H-%M-%S")
 
 df = pd.DataFrame(links)
-df.to_csv(f'./job_links/{today}.csv', header=None, index=False)
+df.to_csv(f'./job_links/{today}_{current_time}.csv', header=None, index=False)
 
 mydriver.quit()
