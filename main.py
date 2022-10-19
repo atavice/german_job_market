@@ -4,8 +4,6 @@ from math import ceil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import platform 
-import pyautogui
 import bs4 as bs
 
 DRIVER_PATH = "./chromedriver"
@@ -23,14 +21,17 @@ meta_contents_have_job_number = []
 
 for meta in soup.find_all('meta'):
     if 'content' in meta.attrs:
+        #Checks both turkish and english site content
         if ('yeni)' in meta['content']) or ('new)' in meta['content']) :
             meta_contents_have_job_number.append(meta['content'])
-       
+
+#Strips out the job number from its meta data    
 preprocessed_content = meta_contents_have_job_number[0].split('(')
 further_preprocessed_content = preprocessed_content[1].split(' ')
 number_of_jobs = int(further_preprocessed_content[0])
+
 num_of_scroll_down = ceil(number_of_jobs/NUM_OF_JOBS_PER_REFRESH) + 2
-print(number_of_jobs)
+
 for _ in range(num_of_scroll_down):
     time.sleep(0.5)
     mydriver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.END)
@@ -42,6 +43,8 @@ for _ in range(num_of_scroll_down):
     time.sleep(0.5)
 
 time.sleep(5)
+
+#Soup it again to catch recently rendered jobs
 HTML_code = mydriver.page_source
 soup = bs.BeautifulSoup(HTML_code, 'html.parser')
 
