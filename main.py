@@ -29,12 +29,32 @@ for meta in soup.find_all('meta'):
 preprocessed_content = meta_contents_have_job_number[0].split('(')
 further_preprocessed_content = preprocessed_content[1].split(' ')
 number_of_jobs = int(further_preprocessed_content[0])
-num_of_scroll_down = ceil(number_of_jobs/NUM_OF_JOBS_PER_REFRESH) - 1
-
+num_of_scroll_down = ceil(number_of_jobs/NUM_OF_JOBS_PER_REFRESH) + 2
+print(number_of_jobs)
 for _ in range(num_of_scroll_down):
-    time.sleep(1.5)
+    time.sleep(0.5)
     mydriver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.END)
-    
+    time.sleep(0.5)
+    mydriver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.HOME)
+    time.sleep(0.5)
+    mydriver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.END)
+    mydriver.find_element(by=By.TAG_NAME, value="body").send_keys(Keys.END)
+    time.sleep(0.5)
 
 time.sleep(5)
+HTML_code = mydriver.page_source
+soup = bs.BeautifulSoup(HTML_code, 'html.parser')
+
+ul_jobs = soup.find('ul', {'class': 'jobs-search__results-list'})
+lis_jobs = ul_jobs.find_all('li')
+
+links = []
+for li in lis_jobs:
+    anchor_of_job = li.find_all('a', {'data-tracking-control-name': 'public_jobs_jserp-result_search-card'})
+    links.append(anchor_of_job[0]['href'])
+
+for link in links:
+    print(link)
+    
+time.sleep(600)
 mydriver.quit()
