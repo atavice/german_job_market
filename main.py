@@ -1,10 +1,12 @@
 import time
+import csv
+import bs4 as bs
+import pandas as pd
+from datetime import date
 from math import ceil
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import bs4 as bs
 
 DRIVER_PATH = "./chromedriver"
 BASE_URL = "https://www.linkedin.com"
@@ -55,9 +57,10 @@ links = []
 for li in lis_jobs:
     anchor_of_job = li.find_all('a', {'data-tracking-control-name': 'public_jobs_jserp-result_search-card'})
     links.append(anchor_of_job[0]['href'])
-
-for link in links:
-    print(link)
     
-time.sleep(600)
+today = date.today()
+
+df = pd.DataFrame(links)
+df.to_csv(f'./job_links/{today}.csv', header=None, index=False)
+
 mydriver.quit()
