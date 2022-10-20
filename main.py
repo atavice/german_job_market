@@ -7,6 +7,8 @@ from math import ceil
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+import platform
+import os
 
 DRIVER_PATH = "./chromedriver"
 BASE_URL = "https://www.linkedin.com"
@@ -50,19 +52,20 @@ time.sleep(5)
 HTML_code = mydriver.page_source
 soup = bs.BeautifulSoup(HTML_code, 'html.parser')
 
-ul_jobs = soup.find('ul', {'class': 'jobs-search__results-list'})
-lis_jobs = ul_jobs.find_all('li')
-
 links = []
-for li in lis_jobs:
-    anchor_of_job = li.find_all('a', {'data-tracking-control-name': 'public_jobs_jserp-result_search-card'})
-    links.append(anchor_of_job[0]['href'])
+for link in soup.find_all('a', {'class': 'base-card__full-link absolute top-0 right-0 bottom-0 left-0 p-0 z-[2]'}):
+    links.append(link.get('href'))
 
 today = date.today()
 now = datetime.now()
 current_time = now.strftime("%H-%M-%S")
 
+if platform.system == 'Darwin':
+    os.makedirs('./job_links', exist_ok=True)
+
 df = pd.DataFrame(links)
 df.to_csv(f'./job_links/{today}_{current_time}.csv', header=None, index=False)
 
 mydriver.quit()
+
+

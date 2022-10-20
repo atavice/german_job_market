@@ -2,3 +2,6 @@ venv/
 chromedriver
 chromedriver.exe
 .idea/
+.DS_Store
+.vscode/
+job_links/
