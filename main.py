@@ -5,7 +5,7 @@ import platform
 import bs4 as bs
 import pandas as pd
 from datetime import date
-
+import chromedriver_autoinstaller
 from math import ceil
 from selenium import webdriver
 from pyvirtualdisplay import Display
@@ -22,6 +22,7 @@ NUM_OF_JOBS_PER_REFRESH = 25
 display = Display(visible=0, size=(800, 800))  
 display.start()
 
+chromedriver_autoinstaller.install()
 chrome_options = webdriver.ChromeOptions()    
  
 options = ["--window-size=1200,1200", "--ignore-certificate-errors"]
