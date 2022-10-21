@@ -32,7 +32,7 @@ for option in options:
     chrome_options.add_argument(option)
 
     
-mydriver = webdriver.Chrome("./chromedriver", options = chrome_options)
+mydriver = webdriver.Chrome("./chromedriver.exe", options = chrome_options)
 # mydriver = webdriver.Chrome(DRIVER_PATH)
 
 
