@@ -23,7 +23,7 @@ jobs:
         run: sudo apt purge google-chrome-stable  
 
       - name: install all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay bs4 pandas 
+        run: pip install selenium pyvirtualdisplay bs4 pandas 
       - name: install xvfb
         run: sudo apt-get install xvfb
           

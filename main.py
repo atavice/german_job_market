@@ -1,7 +1,6 @@
 import os
 import time
 import platform
-import chromedriver_autoinstaller
 
 import bs4 as bs
 import pandas as pd
@@ -23,7 +22,6 @@ NUM_OF_JOBS_PER_REFRESH = 25
 display = Display(visible=0, size=(800, 800))  
 display.start()
 
-chromedriver_autoinstaller.install()
 chrome_options = webdriver.ChromeOptions()    
  
 options = ["--window-size=1200,1200", "--ignore-certificate-errors"]
