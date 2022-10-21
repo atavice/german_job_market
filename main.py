@@ -15,7 +15,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-DRIVER_PATH = "./chromedriver.exe"
+DRIVER_PATH = "./chromedriver"
 BASE_URL = "https://www.linkedin.com"
 EXTENTION_URL = "/jobs/search?keywords=Working%20Student&location=M%C3%BCnih%2C%20Bavyera%2C%20Almanya&locationId=&geoId=100477049&f_TPR=r86400&distance=25&position=1&pageNum=0"
 NUM_OF_JOBS_PER_REFRESH = 25
@@ -32,7 +32,7 @@ for option in options:
     chrome_options.add_argument(option)
 
     
-mydriver = webdriver.Chrome("./chromedriver", options = chrome_options)
+mydriver = webdriver.Chrome(DRIVER_PATH, options = chrome_options)
 # mydriver = webdriver.Chrome(DRIVER_PATH)
 
 
