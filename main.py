@@ -16,26 +16,21 @@ from selenium.webdriver.chrome.service import Service
 
 DRIVER_PATH = "./chromedriver"
 BASE_URL = "https://www.linkedin.com"
+# TODO: Münich, Berlin ve Köln için gereken verisyonları yapılacak.
 EXTENTION_URL = "/jobs/search?keywords=Working%20Student&location=M%C3%BCnih%2C%20Bavyera%2C%20Almanya&locationId=&geoId=100477049&f_TPR=r86400&distance=25&position=1&pageNum=0"
 NUM_OF_JOBS_PER_REFRESH = 25
 
-display = Display(visible=0, size=(800, 800))  
-display.start()
 
 chromedriver_autoinstaller.install()
 chrome_options = webdriver.ChromeOptions()    
  
-options = ["--window-size=1200,1200", "--ignore-certificate-errors"]
+options = ["--window-size=1920x1080", "--ignore-certificate-errors", '--headless', '--no-sandbox', '--disable-dev-shm-usage']
 
 for option in options:
     chrome_options.add_argument(option)
 
     
 mydriver = webdriver.Chrome(DRIVER_PATH, options = chrome_options)
-# mydriver = webdriver.Chrome(DRIVER_PATH)
-
-
-
 mydriver.get(BASE_URL + EXTENTION_URL)
 
 HTML_code = mydriver.page_source
@@ -78,6 +73,7 @@ for link in soup.find_all('a', {'class': 'base-card__full-link absolute top-0 ri
 
 today = date.today()
 
+# TODO: Diğer işletim sistemlerini de kapsayacak şekilde yapmak lazım.
 if platform.system == 'Darwin':
     os.makedirs('./job_links', exist_ok=True)
 
@@ -85,6 +81,5 @@ df = pd.DataFrame(links)
 df.to_csv(f'./job_links/{today}.csv', header=None, index=False)
 
 mydriver.quit()
-display.stop()
 
 
