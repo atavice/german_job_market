@@ -38,13 +38,13 @@ for link in links:
     
     mydriver.get(link)
 
-    time.sleep(1)
+    time.sleep(3)
 
     HTML_code = mydriver.page_source
     soup = bs.BeautifulSoup(HTML_code, 'html.parser')
     desc_list = soup.find_all('div', {'class': 'show-more-less-html__markup'})
     title_list = soup.find_all('h1', {'class': 'top-card-layout__title'})
-    if len(desc_list) != 0:
+    if (len(desc_list) != 0 and len(title_list) != 0) :
         scraped_jobs += 1
         job_titles.append(title_list[0].get_text())
         job_descriptions.append(desc_list[0].get_text())
