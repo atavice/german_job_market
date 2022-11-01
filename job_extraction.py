@@ -16,7 +16,6 @@ from selenium.webdriver.chrome.service import Service
 
 BASE_URL = "https://www.linkedin.com"
 DRIVER_PATH = "./chromedrivermac"
-EXTENSION_URL = "/jobs/search?keywords=Working%20Student&location=M%C3%BCnih%2C%20Bavyera%2C%20Almanya&locationId=&geoId=100477049&f_TPR=r86400&distance=25&position=1&pageNum=0"
 NUM_OF_JOBS_PER_REFRESH = 25
 
 def extract_job_links(scrape_session: dict):
@@ -35,7 +34,7 @@ def extract_job_links(scrape_session: dict):
         chrome_options.add_argument(option)
     
     mydriver = webdriver.Chrome(DRIVER_PATH, options = chrome_options)
-    mydriver.get(BASE_URL + scrape_session['url'])
+    mydriver.get(BASE_URL + scrape_session['extension_url'])
 
     HTML_code = mydriver.page_source
     soup = bs.BeautifulSoup(HTML_code, 'html.parser')
