@@ -8,3 +8,4 @@ chromedriver
 chromedriver.exe
 .ipynb_checkpoints
 *.ipynb
+chromedrivermac
