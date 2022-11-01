@@ -4,6 +4,7 @@ venv/
 .vscode/
 job_links/
 job_descriptions/
+metrics/
 chromedriver
 chromedriver.exe
 .ipynb_checkpoints
