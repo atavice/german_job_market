@@ -2,6 +2,7 @@ import pandas as pd
 from job_extraction import extract_job_links
 from description_extraction import extract_job_descriptions
 from lgbtiq_friendly import calculate_lgbt_metric
+from description_language import calculate_desc_lang_metric
 
 class Metrics:
 
@@ -24,7 +25,7 @@ class Metrics:
             new_day_metrics_dict.update(extract_job_links(scrape_session=scrape_session))
             new_day_metrics_dict.update(extract_job_descriptions(scrape_session=scrape_session))
             new_day_metrics_dict.update(calculate_lgbt_metric(scrape_session=scrape_session))
-            # description language
+            new_day_metrics_dict.update(calculate_desc_lang_metric(scrape_session=scrape_session))
             # required language
             # positions
             # skills
