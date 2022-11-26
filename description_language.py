@@ -6,7 +6,7 @@ import description_preprocessing
 def calculate_desc_lang_metric(scrape_session: dict) -> dict:
     """
     input: city ve url içeren dictionary alır.
-    output: işlerin açıklamalarının dilini içeren dictionary verir.
+    output: işlerin açıklamalarının dilinin sayısını içeren dictionary verir.
     """
 
     today = date.today()
